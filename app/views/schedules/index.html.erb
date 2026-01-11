@@ -1,0 +1,46 @@
+<div class="form-container">
+  <h1>スケジュール一覧</h1>
+
+  <%= link_to "新規作成", new_schedule_path, class: "btn btn-primary mb-3" %>
+
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>タイトル</th>
+          <th>開始日</th>
+          <th>終了日</th>
+          <th>終日</th>
+          <th>更新日時</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @schedules.each do |schedule| %>
+          <tr>
+            <td><%= schedule.id %></td>
+            <td><%= schedule.title %></td>
+            <td><%= schedule.start_at.strftime("%Y/%m/%d") %></td>
+            <td><%= schedule.end_at.strftime("%Y/%m/%d") %></td>
+            <td>
+              <% if schedule.all_day %>
+                <span class="badge bg-success">終日</span>
+              <% end %>
+            </td>
+            <td><%= schedule.updated_at.strftime("%Y/%m/%d %H:%M") %></td>
+            <td>
+              <%= link_to "詳細", schedule_path(schedule), class: "btn btn-sm btn-outline-info me-1" %>
+              <%= link_to "編集", edit_schedule_path(schedule), class: "btn btn-sm btn-outline-warning me-1" %>
+
+              <%= button_to "削除", schedule_path(schedule), 
+                            method: :delete, 
+                            onclick: "return confirm('「#{schedule.title}」を削除してもよろしいですか？')",
+                            class: "btn btn-sm btn-outline-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
