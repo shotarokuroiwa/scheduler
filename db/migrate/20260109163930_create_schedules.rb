@@ -6,7 +6,6 @@ class CreateSchedules < ActiveRecord::Migration[7.2]
       t.date :end_at, null: false
       t.boolean :all_day, default: false, null: false
       t.text :memo, limit: 500
-      
       t.timestamps
     end
   end

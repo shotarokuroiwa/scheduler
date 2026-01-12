@@ -1,9 +1,8 @@
 class SchedulesController < ApplicationController
-    before_action :set_schedule, only: [:show, :edit, :update, :destroy]
+    before_action :set_schedule, only: [ :show, :edit, :update, :destroy ]
 
     def index
         @schedules = Schedule.all
-
     end
 
     def show
@@ -19,7 +18,7 @@ class SchedulesController < ApplicationController
             redirect_to @schedule, notice: "新しく予定を作成しました"
         else
             flash.now[:alert] = "予定の作成に失敗しました"
-            render :new 
+            render :new
         end
     end
 
@@ -53,5 +52,4 @@ class SchedulesController < ApplicationController
     def schedule_params
         params.require(:schedule).permit(:title, :start_at, :end_at, :all_day, :memo)
     end
-
 end
